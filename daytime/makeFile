@@ -1,0 +1,33 @@
+# Makefile для сборки серверной и клиентской программ
+
+# Компилятор
+CXX = g++
+
+# Флаги компиляции
+CXXFLAGS = -std=c++11 -Wall
+
+# Имена исполняемых файлов
+SERVER_EXEC = server
+CLIENT_EXEC = client
+
+# Исходные файлы
+SERVER_SRC = server.cpp
+CLIENT_SRC = client.cpp
+
+# Правила по умолчанию
+all: $(SERVER_EXEC) $(CLIENT_EXEC)
+
+# Правило сборки сервера
+$(SERVER_EXEC): $(SERVER_SRC)
+ $(CXX) $(CXXFLAGS) -o $(SERVER_EXEC) $(SERVER_SRC)
+
+# Правило сборки клиента
+$(CLIENT_EXEC): $(CLIENT_SRC)
+ $(CXX) $(CXXFLAGS) -o $(CLIENT_EXEC) $(CLIENT_SRC)
+
+# Очистка скомпилированных файлов
+clean:
+ rm -f $(SERVER_EXEC) $(CLIENT_EXEC)
+ 
+# Объявление "фантомных" целей, чтобы Makefile не пытался создавать файлы с такими именами
+.PHONY: all clean
